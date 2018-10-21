@@ -25,7 +25,7 @@ public class MovieController {
 	private MovieRepository movieRepo;
     
     @RequestMapping(method = RequestMethod.GET, produces="application/json") 
-    public List<Movie> getMoviesByTitleGenre(@RequestParam(required=false) String title, @RequestParam(required=false) String genre) {
+    public List<Movie> getMovies(@RequestParam(required=false) String title, @RequestParam(required=false) String genre) {
     	if(title != null && title.length() > 0) {
     		return movieRepo.findByGenreLike(genre);
     	} else if(genre != null && genre.length() > 0) {
