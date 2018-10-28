@@ -5,10 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * The movie application user stories:
- * <p>
  * 1. As a movie app admin I should be able to add/update/remove movies. A movie
- * should have a title, description and genre. 
- * <p>
+ * should have a title, description and genre. I should also be able to remove users.
  * 2. As a registered movie app user I should be able to see a list of movies with details.
  * I should be able to search by title, description and movies I've seen. I
  * should be able to sort by title, description, genre and score. 3. As a movie

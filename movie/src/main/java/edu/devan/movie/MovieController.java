@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.annotation.Resource;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.devan.movie.data.MovieRepository;
 import edu.devan.movie.domain.Movie;
 
-
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping(path="/movies")
 public class MovieController {
@@ -52,9 +53,10 @@ public class MovieController {
     	return ResponseEntity.noContent().build();
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, consumes="application/json") 
-    public ResponseEntity<?> deleteMovie(@RequestBody Movie movie) {
-    	movieRepo.delete(movie);
+    @RequestMapping(method = RequestMethod.DELETE, value="{id}") 
+    public ResponseEntity<?> deleteMovie(@PathVariable String id) {
+    	Optional<Movie> movie = movieRepo.findById(id);
+    	movieRepo.delete(movie.get());
     	return ResponseEntity.noContent().build();
     }
 
