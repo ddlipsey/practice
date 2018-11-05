@@ -14,49 +14,48 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.devan.movie.data.MovieRepository;
-import edu.devan.movie.domain.Movie;
+import edu.devan.movie.data.GenreRepository;
+import edu.devan.movie.domain.Genre;
+
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping(path="/movies")
-public class MovieController {
+@RequestMapping(path="/genres")
+public class GenreController {
 	
-	@Resource(name="movieRepo")
-	private MovieRepository movieRepo;
+	@Resource(name="genreRepo")
+	private GenreRepository genreRepo;
     
     @RequestMapping(method = RequestMethod.GET, produces="application/json") 
-    public List<Movie> getMovies(@RequestParam(required=false) String title, @RequestParam(required=false) String genre) {
-    	if(title != null && title.length() > 0) {
-    		return movieRepo.findByTitleLike(title);
-    	} else if(genre != null) {
-    		return movieRepo.findByGenreLike(genre);
+    public List<Genre> getGenres(@RequestParam(required=false) String name) {
+    	if(name != null && name.length() > 0) {
+    		return genreRepo.findByNameLike(name);
     	} else {
-    		return movieRepo.findAll();
+    		return genreRepo.findAll();
     	}
     }
     
     @RequestMapping(method = RequestMethod.GET, produces="application/json", value="{id}") 
-    public Optional<Movie> getMovie(@PathVariable String id) {
-    	return movieRepo.findById(id);
+    public Optional<Genre> getGenre(@PathVariable String id) {
+    	return genreRepo.findById(id);
     }
     
     @RequestMapping(method = RequestMethod.POST, consumes="application/json") 
-    public ResponseEntity<?> addMovie(@RequestBody Movie movie) {
-    	movieRepo.insert(movie);
+    public ResponseEntity<?> addGenre(@RequestBody Genre genre) {
+    	genreRepo.insert(genre);
     	return ResponseEntity.noContent().build();
     }
     
     @RequestMapping(method = RequestMethod.PUT, consumes="application/json") 
-    public ResponseEntity<?> updateMovie(@RequestBody Movie movie) {
-    	movieRepo.save(movie);
+    public ResponseEntity<?> updateGenre(@RequestBody Genre genre) {
+    	genreRepo.save(genre);
     	return ResponseEntity.noContent().build();
     }
     
     @RequestMapping(method = RequestMethod.DELETE, value="{id}") 
-    public ResponseEntity<?> deleteMovie(@PathVariable String id) {
-    	Optional<Movie> movie = movieRepo.findById(id);
-    	movieRepo.delete(movie.get());
+    public ResponseEntity<?> deleteGenre(@PathVariable String id) {
+    	Optional<Genre> genre = genreRepo.findById(id);
+    	genreRepo.delete(genre.get());
     	return ResponseEntity.noContent().build();
     }
 

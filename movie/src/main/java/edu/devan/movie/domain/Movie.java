@@ -3,6 +3,7 @@ package edu.devan.movie.domain;
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 public class Movie implements Serializable{
 	
@@ -55,6 +56,7 @@ public class Movie implements Serializable{
 	public void setScore(String score) {
 		this.score = score;
 	}
+	
 	public String getGenre() {
 		return genre;
 	}
