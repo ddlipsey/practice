@@ -1,0 +1,20 @@
+<div *ngIf="movie">
+
+  <h2>{{movie.title | uppercase}} Details</h2>
+  <div>description:{{movie.description}}</div>
+  <div>
+      <label>title:
+      <input [(ngModel)]="movie.title" placeholder="title">
+      </label>
+      <label>genre:
+      <select id="genre"  required [(ngModel)]="movie.genre" name="genre">
+          <option *ngFor="let gen of genres" [value]="gen.name">{{gen.name}}</option>
+      </select>
+      </label>
+      <label>score:
+      <input [(ngModel)]="movie.score" placeholder="score">
+      </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
+</div>
